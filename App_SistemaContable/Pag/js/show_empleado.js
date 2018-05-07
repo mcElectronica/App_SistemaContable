@@ -34,10 +34,10 @@
                     
                 },
                 error: function (r) {
-                    alert(r.responseText);
+                    alert(r.responseText + "Noconectada");
                 },
                 failure: function (r) {
-                    alert(r.responseText);
+                    alert(r.responseText + "Noconectada");
                 }
             });
             return false;

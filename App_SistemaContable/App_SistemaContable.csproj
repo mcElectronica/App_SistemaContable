@@ -83,6 +83,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="clase\Cliente.cs" />
+    <Compile Include="clase\Empleado.cs" />
     <Compile Include="Conexion.cs" />
     <Compile Include="InsertarCliente.asmx.cs">
       <DependentUpon>InsertarCliente.asmx</DependentUpon>

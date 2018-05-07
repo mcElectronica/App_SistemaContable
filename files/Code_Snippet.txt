@@ -1,0 +1,27 @@
+//Create a connection to Oracle
+string conString = "User Id=hr; password=hr;" +
+
+//How to connect to an Oracle DB without SQL*Net configuration file
+	//also known as tnsnames.ora.
+"Data Source=localhost:1521/orcl; Pooling=false;";
+
+//How to connect to an Oracle Database with a Database alias.
+//Uncomment below and comment above.
+//"Data Source=orcl;Pooling=false;";
+
+OracleConnection con =  new OracleConnection();
+con.ConnectionString = conString;
+con.Open();
+
+//Create a command within the context of the connection
+//Use the command to display employee names and salary from the Employees table
+OracleCommand cmd= con.CreateCommand();
+cmd.CommandText = "select first_name from employees where department_id = 60";
+
+//Execute the command and use datareader to display the data
+OracleDataReader reader = cmd.ExecuteReader();
+while (reader.Read())
+{
+	Console.WriteLine("Employee Name: " + reader.GetString(0));
+}
+Console.ReadLine();

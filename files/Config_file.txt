@@ -1,0 +1,11 @@
+  <oracle.manageddataaccess.client>
+    <version number="*">
+      <dataSources>
+        <dataSource alias="orcl" descriptor="(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME = orcl)))"/>
+      </dataSources>
+      <settings>
+        <!--	<setting name="TNS_ADMIN" value="C:\app\oracle\product\12.1.0\client_1\Network\Admin\"/>  -->
+      </settings>
+    </version>
+  </oracle.manageddataaccess.client>  
+  

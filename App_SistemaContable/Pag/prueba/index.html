@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+
+	<link rel="stylesheet" type="text/css" href="DataTables/datatables.min.css"/>
+</head>
+<body>
+	<table id="example" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Position</th>
+                <th>Office</th>
+                <th>Extn.</th>
+                <th>Start date</th>
+                <th>Salary</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>Name</th>
+                <th>Position</th>
+                <th>Office</th>
+                <th>Extn.</th>
+                <th>Start date</th>
+                <th>Salary</th>
+            </tr>
+        </tfoot>
+    </table>
+	<script src="jquery-1.12.4.js"></script>
+	<script src="jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="DataTables/datatables.min.js"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+            $('#example').DataTable( {
+                "processing": true,
+                "serverSide": true,
+                "ajax": "../../ObtenerCliente.asmx/GetCustomerNames",
+                "columns": [
+                    { "Table": "Pnombre" },
+                    { "Table": "Papellido" },
+                    { "Table": "Dpi" },
+                    { "Table": "Nit" },
+                    { "Table": "Telefono" },
+                    { "Table": "Direccion" }
+                ]
+            } );
+        } );
+	</script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+﻿body {
+}
+.myAlert-bottom{
+    position: fixed;
+    bottom: 5px;
+    left:20%;
+    width: 30%;
+}
+
+.alert{
+    display: none;
+}

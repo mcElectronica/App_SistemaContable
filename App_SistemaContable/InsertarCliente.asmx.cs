@@ -14,18 +14,27 @@ namespace App_SistemaContable
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [System.ComponentModel.ToolboxItem(false)]
     // Para permitir que se llame a este servicio web desde un script, usando ASP.NET AJAX, quite la marca de comentario de la línea siguiente. 
-    // [System.Web.Script.Services.ScriptService]
+    [System.Web.Script.Services.ScriptService]
     public class InsertarCliente : System.Web.Services.WebService
     {
 
         [WebMethod]
-        public int addcustumers(int id, string nombre, string descrip)
+        public int addcustumers(string pnombre, string snombre, string papellido, string sapellido, int dpi, int nit, int telefono, string email,
+            string direccion, int municipio)
+
         {
             Conexion oraconn = new Conexion();
             OracleCommand oracmd = new OracleCommand();
-            oracmd.Parameters.Add("idprueba", id);
-            oracmd.Parameters.Add("nombre_in", nombre);
-            oracmd.Parameters.Add("descripcion_in", descrip);
+            oracmd.Parameters.Add("p_nombre_in", pnombre);
+            oracmd.Parameters.Add("s_nombre_in", snombre);
+            oracmd.Parameters.Add("p_apellido_in", papellido);
+            oracmd.Parameters.Add("s_apellido_in", sapellido);
+            oracmd.Parameters.Add("dpi_in", dpi);
+            oracmd.Parameters.Add("nit_in", nit);
+            oracmd.Parameters.Add("telefono_in", telefono);
+            oracmd.Parameters.Add("email_in", email);
+            oracmd.Parameters.Add("direccion_in", direccion);
+            oracmd.Parameters.Add("municipio_in", municipio);
             oracmd.CommandText = "insertempleado";
             oracmd.CommandType = System.Data.CommandType.StoredProcedure;
             oracmd.Connection = oraconn.Cnn;

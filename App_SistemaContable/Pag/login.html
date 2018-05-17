@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -27,14 +27,14 @@
           </div>
           <div class="form-group">
             <label for="exampleInputEmail1">Usuario</label>
-            <input class="form-control" id="exampleInputEmail1" type="email" aria-describedby="emailHelp" placeholder="Enter email">
+            <input class="form-control" id="InputUsername" type="email" aria-describedby="emailHelp" placeholder="Enter email">
           </div>
           <div class="form-group">
             <label for="exampleInputPassword1">Contraseña</label>
-            <input class="form-control" id="exampleInputPassword1" type="password" placeholder="Password">
+            <input class="form-control" id="InputPassword" type="password" placeholder="Password">
           </div>
           
-          <a class="btn btn-primary btn-block" href="index.html">Registrarse</a>
+          <a class="btn btn-primary btn-block" onclick="login()">Registrarse</a>
         </form>
         
       </div>
@@ -45,6 +45,75 @@
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <!-- Core plugin JavaScript-->
   <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <script>
+        $(document).ready(function(){
+
+            if (sessionStorage.getItem("username") != null && sessionStorage.getItem("userpassword") != null) {
+                window.location.href = "index.html";
+            } else {
+                
+            }
+
+            console.log(localStorage.getItem("username"));
+            console.log(localStorage.getItem("userpassword"));
+
+
+
+
+            $(window).bind('keydown', function (e) {
+                if (e.charCode == 13 || e.keyCode == 13) {//ENTER
+                    login();
+                }
+            });
+
+
+        
+        })
+
+        function login() {
+
+            var parametros = {
+                "usuario": $('#InputUsername').val(),
+                "contra": $('#InputPassword').val(),
+            };
+
+            $.ajax({
+                type: "POST",
+                url: "../Login.asmx/verificar",
+                data: JSON.stringify(parametros),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    console.log(response);
+                    $.each(response.d, function (i, item) {
+                        
+                        localStorage.setItem("username", item.Nombre);
+                        localStorage.setItem("userpassword", item.Contra);
+                        
+                    });
+                    console.log(localStorage.getItem("username"));
+                    console.log(localStorage.getItem("userpassword"));
+
+                    if ($('#InputUsername').val() == localStorage.getItem("username") &&
+                        $('#InputPassword').val() == localStorage.getItem("userpassword")) {
+                        window.location.href = "index.html";
+                    } else {
+                        console.log("nombre y contrase;a invalidos");
+                    }
+                },
+                error: function (r) {
+                    alert(r.responseText + "Estamos teniendo Problemas");
+                },
+                failure: function (r) {
+                    alert(r.responseText + "Estamos teniendo Problemas");
+                }
+            });
+
+            
+
+        }
+    </script>
 </body>
 
 </html>

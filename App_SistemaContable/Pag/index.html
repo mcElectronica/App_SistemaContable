@@ -65,12 +65,14 @@
               <input id="telefono" type="text" class="form-control" placeholder="Telefono">
             </div>
             <div class="col">
-                <input id="municipio" type="text" class="form-control" placeholder="Municipio">
+                <select id="selectDepartamento" class="form-control">
+                    <option value="0" selected>Seleccionar Departamento</option>
+                    
+                </select>
             </div>
             <div class="col">
-              <select id="inputState" class="form-control">
-                <option selected>Departamento</option>
-                <option>...</option>
+              <select id="selectMunicipio" class="form-control">
+                <option selected>Seleccionar Municipio</option>
               </select>
             </div>
           </div>
@@ -93,8 +95,8 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="myAlertBottom()">Cancelar</button>
-        <button type="button" class="btn btn-primary" onclick="insertarCliente()">Guardar</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button id="btnInsertarCliente" type="button" class="btn btn-primary">Guardar</button>
       </div>
     </div>
   </div>
@@ -241,7 +243,7 @@
       </ol>
       
       <!-- Example DataTables Card-->
-      <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#addClienteModal">Agragar Nuevo Cliente</button>
+      <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#addClienteModal" onclick="llemarComboDepartamento()">Agragar Nuevo Cliente</button>
       <div class="card mb-3">
         <div class="card-header">
           <i class="fa fa-table"></i> Listado</div>
@@ -300,19 +302,20 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Saliendo del Sistema</h5>
             <button class="close" type="button" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">×</span>
             </button>
           </div>
-          <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+          <div class="modal-body">Realmente desea Salir del sistema</div>
           <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            <a class="btn btn-primary" href="login.html">Logout</a>
+            <a class="btn btn-primary" id="logout" href="login.html">Salir</a>
           </div>
         </div>
       </div>
     </div>
+
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -330,6 +333,27 @@
     <script src="js/sb-admin-charts.min.js"></script>
     <script src="js/show_empleado.js"></script>
   </div>
+
+    <script>
+        $(document).ready(function(){
+
+            console.log(localStorage.getItem("username"));
+            console.log(localStorage.getItem("userpassword"));
+
+            if (localStorage.getItem("username") == null || localStorage.getItem("userpassword") == null) {
+                window.location.href = "login.html";
+            }
+
+            $("#logout").click(function () {
+                localStorage.removeItem("username");
+                logalstorage.removeItem("userpassword");
+                localStorage.clear();
+
+            });
+
+        })
+    </script>
+
 </body>
 
 </html>

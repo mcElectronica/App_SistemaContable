@@ -57,5 +57,64 @@ namespace App_SistemaContable
             return customerList;
 
         }
+
+        [WebMethod]
+        public List<Cliente> GetCustomer(int idcliente)
+        {
+
+            Conexion oraconn = new Conexion();
+            OracleCommand oracmd = new OracleCommand();
+            oracmd.Parameters.Add("o_cursorclt", OracleDbType.RefCursor, System.Data.ParameterDirection.Output);
+            oracmd.Parameters.Add("IDCLIENTE_IN", idcliente );
+            oracmd.CommandText = "SELECTROW.selectcliente";
+            oracmd.CommandType = System.Data.CommandType.StoredProcedure;
+            oracmd.Connection = oraconn.Cnn;
+            OracleDataReader dr = oracmd.ExecuteReader();
+
+            List<Cliente> customerList = new List<Cliente>();
+            while (dr.Read())
+            {
+                customerList.Add(new Cliente()
+                {
+                    Idcliente = idcliente,
+                    Pnombre = dr.GetString(0),
+                    Snombre = dr.GetString(1),
+                    Papellido = dr.GetString(2),
+                    Sapellido = dr.GetString(3),
+                    Dpi = dr.GetInt32(4),
+                    Nit = dr.GetInt32(5),
+                    Telefono = dr.GetInt32(7),
+                    Email = dr.GetString(6),
+                    Direccion = dr.GetString(8),
+                    Municipio = dr.GetString(9)
+                });
+            }
+
+            oraconn.Cerrar();
+
+
+            //var json = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(customerList);
+            return customerList;
+
+        }
+
+        [WebMethod]
+        public int DeleteCustomer(int idcliente)
+        {
+
+            Conexion oraconn = new Conexion();
+            OracleCommand oracmd = new OracleCommand();
+            oracmd.Parameters.Add("IDCLIENTE_IN", idcliente);
+            oracmd.CommandText = "DELETECLIENTE";
+            oracmd.CommandType = System.Data.CommandType.StoredProcedure;
+            oracmd.Connection = oraconn.Cnn;
+            int res = oracmd.ExecuteNonQuery();
+
+            oraconn.Cerrar();
+
+            //var json = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(customerList);
+            return res;
+
+        }
     }
 }

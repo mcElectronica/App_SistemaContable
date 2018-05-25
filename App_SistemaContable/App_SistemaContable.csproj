@@ -85,6 +85,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Pag\css\estilos.css" />
+    <Content Include="Pag\js\Proveedores.js" />
+    <Content Include="Proveedores.asmx" />
     <Content Include="Web.config" />
     <Content Include="WebForm1.aspx" />
   </ItemGroup>
@@ -93,6 +95,7 @@
     <Compile Include="clase\Departamento.cs" />
     <Compile Include="clase\Empleado.cs" />
     <Compile Include="clase\Municipio.cs" />
+    <Compile Include="clase\Proveedor.cs" />
     <Compile Include="clase\Usuario.cs" />
     <Compile Include="Conexion.cs" />
     <Compile Include="InsertarCliente.asmx.cs">
@@ -112,6 +115,10 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Proveedores.asmx.cs">
+      <DependentUpon>Proveedores.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="WebForm1.aspx.cs">
       <DependentUpon>WebForm1.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

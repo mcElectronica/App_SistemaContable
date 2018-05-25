@@ -118,13 +118,13 @@
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
           <a class="nav-link" href="charts.html">
             <i class="fa fa-fw fa-area-chart"></i>
-            <span class="nav-link-text">Negocios</span>
+            <span class="nav-link-text">Proveedores</span>
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
           <a class="nav-link" href="tables.html">
             <i class="fa fa-fw fa-table"></i>
-            <span class="nav-link-text">Libo de Compras</span>
+            <span class="nav-link-text">Producto</span>
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
@@ -243,7 +243,7 @@
       </ol>
       
       <!-- Example DataTables Card-->
-      <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#addClienteModal" onclick="llemarComboDepartamento()">Agragar Nuevo Cliente</button>
+      <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#addClienteModal" id="btnaddcliente">Agragar Nuevo Cliente</button>
       <div class="card mb-3">
         <div class="card-header">
           <i class="fa fa-table"></i> Listado</div>
@@ -252,6 +252,7 @@
             <table class="table table-bordered table table-hover" id="dataTablee" width="100%" cellspacing="0">
               <thead>
                 <tr>
+                    <th width="1%">No.</th>  
                   <th>Nombre</th>
                   <th>Apellido</th>
                   <th>DPI</th>
@@ -263,6 +264,7 @@
               </thead>
               <tfoot>
                 <tr>
+                    <th width="1%">No.</th>
                   <th>Nombre</th>
                   <th>Apellido</th>
                   <th>DPI</th>
@@ -279,7 +281,7 @@
        
           <div class="myAlert-bottom alert alert-success">
               <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-              <strong>Guardado!</strong> Cliente Ingresado Exitosamente..!
+              <strong>Guardado!</strong> Datos Guardados
           </div>
         <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
       </div>
@@ -345,8 +347,8 @@
             }
 
             $("#logout").click(function () {
+                localStorage.removeItem("userpassword");
                 localStorage.removeItem("username");
-                logalstorage.removeItem("userpassword");
                 localStorage.clear();
 
             });

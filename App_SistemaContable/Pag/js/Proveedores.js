@@ -5,8 +5,12 @@
         "info": "Pagina _PAGE_ de _PAGES_",
         "infoEmpty": "No records available",
         "infoFiltered": "(filtered from _MAX_ total records)"
-    }
+    },
+    "lengthMenu": [[25, 50, -1], [25, 50, "All"]]
 });
+
+
+var idproveedor = 0;
 
 $(function () {
     var valorDepartamento = 0;
@@ -65,8 +69,8 @@ function mostrarProveedores() {
                         item.Direccion,
                         item.Email,
                         item.Municipio,
-                        "<a class='btn btn-outline-primary btnEditar' href=" + item.IdProveedor + " role='button'><i class='material-icons'>edit</i></a>" +
-                        "<button type='button' class='btn btn-outline-primary'><i class='material-icons'>delete</i></button>" +
+                        "<a class='btn btn-outline-primary btnEditar' value=" + item.IdProveedor + " role='button'><i class='material-icons'>edit</i></a>" +
+                        "<button type='button' class='btn btn-outline-primary'value=" + item.IdProveedor + "><i class='material-icons'>delete</i></button>" +
                                 "<button type='button' class='btn btn-outline-primary'><i class='material-icons'>pageview</i></button></td>"]).draw(false);
                 count++;
             });
@@ -74,11 +78,42 @@ function mostrarProveedores() {
 
 
             $(".btnEditar").click(function (event) {
-                event.preventDefault();
-                var idcliente = $(this).attr('href');
-                console.log(idcliente
+                llemarComboDepartamento();
+                banderaBtnGuardar = 1;
+                idcliente = $(this).val();
+                console.log(banderaBtnGuardar);
+                console.log("idcliente: " + idcliente);
+                $('#addClienteModal').modal('show');
 
-                    );
+                var id = { "idcliente": idcliente }
+                $.ajax({
+                    type: "POST",
+                    url: "../ObtenerCliente.asmx/GetCustomer",
+                    data: JSON.stringify(id),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        console.log(response);
+                        $.each(response.d, function (i, item) {
+                            $('#primerNombre').val(item.Pnombre),
+                           $('#segundoNombre').val(item.Snombre),
+                           $('#primerApellido').val(item.Papellido),
+                           $('#segundoApellido').val(item.Sapellido),
+                           $('#dpi').val(item.Dpi),
+                           $('#nit').val(item.Nit),
+                           $('#telefono').val(item.Telefono),
+                           $('#email').val(item.Email),
+                           $('#direccion').val(item.Direccion)
+                        });
+
+                    },
+                    error: function (r) {
+                        alert(r.responseText + "Estamos teniendo Problemas");
+                    },
+                    failure: function (r) {
+                        alert(r.responseText + "Estamos teniendo Problemas");
+                    }
+                });
 
             });
 
